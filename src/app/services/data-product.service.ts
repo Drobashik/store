@@ -8,14 +8,22 @@ import { TProduct } from "../models/product.model";
 })
 export class DataProductService {
 
-    static url: string = 'https://fakestoreapi.com/products'
+    private static url: string = 'https://fakestoreapi.com/'
     
     constructor(
         private http: HttpClient,
     ) {}
 
     getProductData(limit: number): Observable<TProduct[]> {
-        return this.http.get<TProduct[]>(`${DataProductService.url}?limit=${limit}`)
+        return this.http.get<TProduct[]>(`${DataProductService.url}products?limit=${limit}`)
+    }
+
+    getCategoriesData(): Observable<string[]> {
+        return this.http.get<string[]>(`${DataProductService.url}products/categories`)
+    }
+
+    getProductByCategory(category: string) {
+        return this.http.get(`${DataProductService.url}products/category/${category}`)
     }
 
 }
