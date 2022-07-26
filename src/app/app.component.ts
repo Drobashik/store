@@ -43,4 +43,13 @@ export class AppComponent implements OnInit {
       console.log(value);
       this.searchValue = value;
     }
+
+    getCategoryValue(category: string) {
+      this.dataProductService.getProductByCategory(category).subscribe({
+        next: (categoryProducts) => {
+          console.log(categoryProducts);
+          this.products = categoryProducts
+        }
+      })
+    }
 }
