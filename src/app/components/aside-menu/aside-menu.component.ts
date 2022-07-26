@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs';
 import { DataProductService } from 'src/app/services/data-product.service';
 
 @Component({
@@ -8,21 +9,24 @@ import { DataProductService } from 'src/app/services/data-product.service';
 })
 export class AsideMenuComponent implements OnInit {
 
-  @Output() valueEvent = new EventEmitter<string>()
+  @Output() valueEvent = new EventEmitter<string>();
+  @Output() categoryEvent = new EventEmitter<string>();
 
   searchValue: string = '';
-  categories: string[] = []
+  categories: Observable<string[]>;
+  chosenCategory: HTMLOptionElement;
 
   constructor(
     private productService: DataProductService,
   ) { }
 
   ngOnInit(): void {
-    this.productService.getCategoriesData().subscribe(categories => {
-      this.categories = categories
-    })
+    this.categories = this.productService.getCategoriesData()
   }
-
+  
+  setCategory(category: string) {
+    this.categoryEvent.emit(category.toLowerCase())
+  }
 
   outputEvent() {
     this.valueEvent.emit(this.searchValue)
