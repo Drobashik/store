@@ -22,8 +22,11 @@ export class DataProductService {
         return this.http.get<string[]>(`${DataProductService.url}products/categories`)
     }
 
-    getProductByCategory(category: string) {
-        return this.http.get(`${DataProductService.url}products/category/${category}`)
+    getProductByCategory(category: string): Observable<TProduct[]> {
+        if (category === 'all') {
+            return this.getProductData(10)
+        }
+        return this.http.get<TProduct[]>(`${DataProductService.url}products/category/${category}`)
     }
 
 }
