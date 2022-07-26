@@ -8,7 +8,7 @@ export class FilterPipe implements PipeTransform {
 
   transform(products: TProduct[], searchValue: string): TProduct[] {
     if (!searchValue) return products
-    return products.filter(product => product.title.toLowerCase().includes(searchValue))
+    return products.filter(product => product.title.toLowerCase().includes(searchValue.toLowerCase()))
   }
 
 }
