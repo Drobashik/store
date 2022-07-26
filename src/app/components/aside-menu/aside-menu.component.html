@@ -6,8 +6,16 @@
     (click)="outputEvent()"
     class="flex-center">Find</button>
 </div>
-<select name="" id="">
-    <option *ngFor="let category of categories" value="">{{category | titlecase}}</option>
+<select #select 
+name="category" 
+(change)="setCategory(select.value)"
+>
+    <option value="all">All</option>
+    <option 
+    *ngFor="let category of categories | async" [value]="category"
+    >
+    {{category | titlecase}}
+    </option>
 </select>
 
 
