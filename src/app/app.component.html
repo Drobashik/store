@@ -7,16 +7,21 @@
       <i class="uil uil-search"></i>
     </div>
     
-    <aside (mouseenter)="mouseIsOver = true" (mouseleave)="mouseIsOver = false" [ngClass]="{'aside-menu': mouseIsOver}" >
-      <ng-container *ngIf="mouseIsOver">
-        <app-aside-menu></app-aside-menu>
+    <aside
+    (mouseenter)="mouseIsOver = true" 
+    (mouseleave)="mouseIsOver = false" [ngClass]="{'aside-menu': mouseIsOver}" 
+    >
+    <ng-container *ngIf="mouseIsOver">
+      <app-aside-menu
+      (valueEvent)="getSearchValue($event)"
+      ></app-aside-menu>
       </ng-container>
     </aside>
     
     
     <section>
       <app-product
-      *ngFor="let product of products"
+      *ngFor="let product of products | filter: searchValue"
       [product]="product"
       ></app-product>
       <div class="dummy"></div>
