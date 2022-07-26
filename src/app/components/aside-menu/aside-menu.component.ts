@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-aside-menu',
@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AsideMenuComponent implements OnInit {
 
+  @Output() valueEvent = new EventEmitter<string>()
+
+  searchValue: string = '';
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+
+  outputEvent() {
+    this.valueEvent.emit(this.searchValue)
+  }
 }
