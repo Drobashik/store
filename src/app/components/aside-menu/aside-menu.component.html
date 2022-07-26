@@ -1,2 +1,13 @@
-<input [(ngModel)]="searchValue" type="text" placeholder="Find Your Item" (input)="outputEvent()">
-<button class="flex-center">Find</button>
+<div class="flex-center">
+    <input [(ngModel)]="searchValue"
+    (keyup.enter)="outputEvent()"
+    type="text" placeholder="Find Your Item">
+    <button
+    (click)="outputEvent()"
+    class="flex-center">Find</button>
+</div>
+<select name="" id="">
+    <option *ngFor="let category of categories" value="">{{category | titlecase}}</option>
+</select>
+
+
