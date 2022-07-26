@@ -15,6 +15,8 @@ export class AppComponent implements OnInit {
   isEnd: boolean = false
 
   products: TProduct[] = [];
+
+  searchValue: string = ''
   
   constructor(
     private dataProductService: DataProductService,
@@ -34,5 +36,11 @@ export class AppComponent implements OnInit {
           this.isEnd = true;
         })
       }
+    }
+
+
+    getSearchValue(value: string) {
+      console.log(value);
+      this.searchValue = value;
     }
 }
