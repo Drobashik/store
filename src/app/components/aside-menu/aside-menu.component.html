@@ -1,2 +1,2 @@
-<input type="text" placeholder="Find Your Item">
+<input [(ngModel)]="searchValue" type="text" placeholder="Find Your Item" (input)="outputEvent()">
 <button class="flex-center">Find</button>
