@@ -1,19 +1,27 @@
 <div class="box flex-center column">
-  <h1>{{"my store" | titlecase}}</h1>
+
+  <header class="flex-center">
+    <i class="fa-solid fa-basket-shopping btn"></i>
+  </header>
 
   <div class="flex-center flex-start">
 
-    <div class="burger flex-center" *ngIf="!mouseIsOver">
+    <div class="burger flex-center" 
+    *ngIf="!mouseIsOver"
+    >
       <i class="uil uil-search"></i>
     </div>
     
     <aside
     (mouseenter)="mouseIsOver = true" 
-    (mouseleave)="mouseIsOver = false" [ngClass]="{'aside-menu': mouseIsOver}" 
+    (mouseleave)="mouseIsOver = false" 
+    [ngClass]="{'aside-menu': mouseIsOver}" 
     >
-    <ng-container *ngIf="mouseIsOver">
-      <app-aside-menu
+    <ng-container>
+      <app-aside-menu 
+      class="aside-comp"
       (valueEvent)="getSearchValue($event)"
+      (categoryEvent)="getCategoryValue($event)"
       ></app-aside-menu>
       </ng-container>
     </aside>
