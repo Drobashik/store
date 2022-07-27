@@ -9,7 +9,7 @@ import { TProduct } from 'src/app/models/product.model';
 })
 export class ProductComponent implements OnInit {
 
-  @Input()product: TProduct = null as any;
+  @Input() product: TProduct;
 
   constructor() { }
 

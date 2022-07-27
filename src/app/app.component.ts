@@ -11,7 +11,6 @@ import { DataProductService } from './services/data-product.service';
 export class AppComponent implements OnInit {
 
   mouseIsOver: boolean = false;
-
   isEnd: boolean = false
 
   products: TProduct[] = [];
@@ -23,31 +22,36 @@ export class AppComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-      this.dataProductService.getProductData(10).subscribe(data => {
-        this.products = this.products.concat(data)
+      this.dataProductService.getProductData(10)
+      .subscribe({
+        next: (data) => {
+          this.products = this.products.concat(data);
+        }
       })
     }
 
     @HostListener("window:scroll", [])
     onScroll(): void {
-      if ((document.documentElement.scrollTop + document.documentElement.clientHeight) >= document.documentElement.scrollHeight && !this.isEnd) {
-        this.dataProductService.getProductData(20).subscribe(data => {
-          this.products = this.products.concat(data.splice(10, 20))
-          this.isEnd = true;
+      if ((document.documentElement.scrollTop 
+        + document.documentElement.clientHeight) >= document.documentElement.scrollHeight && !this.isEnd){
+        this.dataProductService.getProductData(20)
+        .subscribe({
+          next: (data) => {
+            this.products = this.products.concat(data.splice(10, 20));
+            this.isEnd = true;
+          }
         })
       }
     }
 
-
     getSearchValue(value: string) {
-      console.log(value);
       this.searchValue = value;
     }
 
     getCategoryValue(category: string) {
-      this.dataProductService.getProductByCategory(category).subscribe({
+      this.dataProductService.getProductByCategory(category)
+      .subscribe({
         next: (categoryProducts) => {
-          console.log(categoryProducts);
           this.products = categoryProducts
         }
       })
